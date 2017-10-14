@@ -1,0 +1,46 @@
+{
+  "name": "fetch-extended",
+  "version": "0.0.1",
+  "description": "Wrapper of fetch, adding few extra features",
+  "author": "Piotr Tomasz Monarski",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Monar/fetch-extended"
+  },
+  "main": "lib/fetch-extended",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-jest": "21.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
+    "isomorphic-fetch": "2.2.1",
+    "jest": "21.2.1",
+    "jest-cli": "21.2.1",
+    "rollup": "0.50.0"
+  },
+  "keywords": [
+    "fetch"
+  ],
+  "jest": {
+    "setupFiles": [
+      "./testPolyfills.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)(spec|test).js"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ]
+  }
+}

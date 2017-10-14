@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fetch implementation should all the options 1`] = `
+Object {
+  "cache": "default",
+  "headers": Headers {
+    "_headers": Object {},
+  },
+  "method": "GET",
+  "mode": "cors",
+  "timeout": 60000,
+}
+`;
