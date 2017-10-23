@@ -49,3 +49,30 @@ fetch('https://www.this-request-will-be-rejected-after-30-seconds.com', { timeou
   .then(response => handleResponse(response))
   .catch(errorWithUrlAndOptions => handleError(errorWithUrlAndOptions));
 ```
+
+### Default Options
+You can append default options with `setDefaultOptions` function:
+```js
+import fetch from 'fetch-extended'; 
+
+fetch.setDefaultOptions({
+  timeout: 5000, // override default timeout
+  method: 'POST', // make POST a default http method
+})
+
+fetch('https://www.google.com')
+  .then(response => handleResponse(response));
+```
+
+### Default Headers
+You can append default headers with `setDefaultHeaders` function (useful eg. in authentication):
+```js
+import fetch from 'fetch-extended'; 
+
+fetch.setDefaultHeaders({
+  'api-token': 'my-secret-api-token',
+})
+
+fetch('https://www.google.com')
+  .then(response => handleResponse(response));
+```
