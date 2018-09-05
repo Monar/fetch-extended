@@ -1,6 +1,6 @@
 {
   "name": "fetch-extended",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Wrapper of fetch, adding few extra features",
   "author": "Piotr Tomasz Monarski",
   "license": "MIT",
@@ -8,19 +8,30 @@
     "type": "git",
     "url": "https://github.com/Monar/fetch-extended"
   },
-  "main": "lib/fetch-extended",
+  "main": "lib/fetch-extended.cjs.js",
+  "module": "lib/fetch-extended.js",
+  "files": [ "lib" ],
   "scripts": {
-    "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "build": "rollup -c ./rollup.config/es5.js",
+    "build:es6": "rollup -c ./rollup.config/es6.js",
+
+    "version:es5": "npm version $(git describe --abbrev=0) --no-git-tag-version --allow-same-version",
+    "version:es6": "npm version $(git describe --abbrev=0)-es6 --no-git-tag-version --allow-same-version",
+    "publish:es5": "npm run build:es5 && npm run version:es5",
+    "publish:es6": "npm run build:es6 && npm run version:es6",
+    "publish": "npm run publish:es6 && npm run publish:es5"
   },
   "devDependencies": {
-    "babel-core": "6.26.0",
-    "babel-jest": "21.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
+    "@babel/core": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0",
+    "babel-jest": "23.4.2",
     "isomorphic-fetch": "2.2.1",
-    "jest": "21.2.1",
-    "jest-cli": "21.2.1",
-    "rollup": "0.50.0"
+    "jest": "23.5.0",
+    "jest-cli": "23.5.0",
+    "rollup": "0.65.1",
+    "rollup-plugin-babel": "4.0.3"
   },
   "keywords": [
     "fetch"
@@ -40,7 +51,7 @@
   },
   "babel": {
     "plugins": [
-      "transform-es2015-modules-commonjs"
+      "@babel/plugin-transform-modules-commonjs"
     ]
   }
 }
