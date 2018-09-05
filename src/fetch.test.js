@@ -1,14 +1,15 @@
 /* eslint-env jest */
 import 'isomorphic-fetch';
 
-import { fetchImplementation } from './fetch';
+import { fetchWrapper, fetchxDefaults } from './fetch';
+import { TimeoutError } from './errors.js'
 
 describe('Fetch implementation', () => {
   it('should work with just an url', () => {
     const fetch = url => Promise.resolve(url);
     const url = 'http://test.address.com';
 
-    const promise = fetchImplementation(fetch, url);
+    const promise = fetchWrapper(fetch, fetchxDefaults, url);
 
     expect(promise).resolves.toBe(url);
   });
@@ -28,7 +29,7 @@ describe('Fetch implementation', () => {
       'ups not again': 'undefined',
     };
 
-    const promise = fetchImplementation(fetch, url, { query });
+    const promise = fetchWrapper(fetch, fetchxDefaults, url, { query });
 
     promise.then(url => {
       const test = new URL(url);
@@ -50,7 +51,7 @@ describe('Fetch implementation', () => {
       cache: 'default',
     };
 
-    const promise = fetchImplementation(fetch, url, testOptions);
+    const promise = fetchWrapper(fetch, fetchxDefaults, url, testOptions);
 
     expect(promise).resolves.toMatchSnapshot();
   });
@@ -63,8 +64,8 @@ describe('Fetch implementation', () => {
 
     const url = 'http://www.fuu.com/';
 
-    const promise = fetchImplementation(fetch, url, { timeout: 0 });
+    const promise = fetchWrapper(fetch, fetchxDefaults, url, { timeout: 0 });
 
-    await expect(promise).rejects.toBeInstanceOf(Error);
+    await expect(promise).rejects.toBeInstanceOf(TimeoutError);
   });
 });

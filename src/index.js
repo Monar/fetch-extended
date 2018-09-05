@@ -1,2 +1,2 @@
-import fetch from './fetch.js';
-export default fetch;
+export { fetchx as default, fetchx, getFetchx } from './fetch.js';
+export { TimeoutError } from './errors.js'
