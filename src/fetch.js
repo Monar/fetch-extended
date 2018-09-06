@@ -15,7 +15,7 @@ export function fetchx(...args) {
   return fetchWrapper(fetch, fetchxDefaults, ...args);
 }
 
-export function getFetchx(defaultHeaders, defautlOptions) {
+export function getFetchx(defaultHeaders = {}, defautlOptions = {}) {
   const defaults = {
     headers: Object.assign({}, fetchxDefaults.headers, defaultHeaders),
     options: Object.assign({}, fetchxDefaults.options, defautlOptions),
@@ -31,9 +31,9 @@ export function fetchWrapper(fetch, defaults, url, options = {}) {
   const fetchOptions = Object.assign({}, defaults.options, options, { headers });
 
   const promise = fetch(fetchURL, fetchOptions);
-  const { timeout, handleTimeout } = fetchOptions;
+  const { timeout } = fetchOptions;
   if (typeof timeout === 'number') {
-    return timeoutPromise(timeout, promise, fetchURL);
+    return timeoutPromise(timeout, promise, { url: fetchURL, options: fetchOptions });
   }
 
   return promise;

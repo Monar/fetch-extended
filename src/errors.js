@@ -1,8 +1,7 @@
 export class TimeoutError extends Error {
-  constructor(msg, url, timeout) {
+  constructor(msg, request) {
     super(msg);
-    this.timout = timeout;
-    this.url = url;
+    this.request = request;
   }
 }
 

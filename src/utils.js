@@ -21,21 +21,17 @@ export function constructSearchParams(query = {}) {
   return searchParams.toString();
 }
 
-export function timeoutPromise(timeout, promise, url) {
-  return new Promise((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
-      reject(new TimeoutError(`Request ${url} reached timeout.`, url, timeout));
-    }, timeout);
+export function timeoutPromise(timeout, promise, requstData) {
+  let timeoutId = null;
 
-    promise.then(
-      res => {
-        clearTimeout(timeoutId);
-        resolve(res);
-      },
-      err => {
-        clearTimeout(timeoutId);
-        reject(err);
-      },
-    );
+  const timeoutPromise = new Promise((resolve, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new TimeoutError(`Request ${requstData.url} reached timeout. Options: ${JSON.stringify(requstData.options)}`, requstData));
+    }, timeout);
   });
+
+  return Promise.race([timeoutPromise, promise]).then(
+    value => { clearTimeout(timeoutId); return value },
+    error => { clearTimeout(timeoutId); throw error },
+  );
 }

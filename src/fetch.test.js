@@ -30,7 +30,6 @@ describe('Fetch implementation', () => {
     };
 
     const promise = fetchWrapper(fetch, fetchxDefaults, url, { query });
-
     promise.then(url => {
       const test = new URL(url);
       Object.keys(query).forEach(key => {
@@ -43,6 +42,7 @@ describe('Fetch implementation', () => {
     const fetch = (url, options) => Promise.resolve(options);
     const url = 'http://test.address.com';
     const testHeaders = new Headers();
+    testHeaders.append('session-id', 'session-key');
 
     const testOptions = {
       method: 'GET',
@@ -52,20 +52,17 @@ describe('Fetch implementation', () => {
     };
 
     const promise = fetchWrapper(fetch, fetchxDefaults, url, testOptions);
-
     expect(promise).resolves.toMatchSnapshot();
   });
 
   it('should reject when reach timeout', async () => {
     const fetch = () =>
       new Promise(resolve => {
-        setTimeout(() => resolve('lol'), 10000);
+        setTimeout(() => resolve('lol'), 1000);
       });
 
     const url = 'http://www.fuu.com/';
-
     const promise = fetchWrapper(fetch, fetchxDefaults, url, { timeout: 0 });
-
     await expect(promise).rejects.toBeInstanceOf(TimeoutError);
   });
 });

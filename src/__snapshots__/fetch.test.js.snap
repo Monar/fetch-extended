@@ -4,7 +4,11 @@ exports[`Fetch implementation should all the options 1`] = `
 Object {
   "cache": "default",
   "headers": Headers {
-    "_headers": Object {},
+    "_headers": Object {
+      "session-id": Array [
+        "session-key",
+      ],
+    },
   },
   "method": "GET",
   "mode": "cors",
