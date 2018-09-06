@@ -10,7 +10,9 @@
   },
   "main": "lib/fetch-extended.cjs.js",
   "module": "lib/fetch-extended.js",
-  "files": [ "lib" ],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "jest",
     "build:es5": "rollup -c ./rollup.config/es5.js",
