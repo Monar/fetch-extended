@@ -2,7 +2,6 @@
 
 # fetch-extended
 Wrapper of [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), adding few extra features:
-- Allow to pass `Headers` as a plain js object
 - Simplifies work with searchParams, instead handcrafting url, just pass `options.query` and done
 - Timeout requests after 60s by default and allows to change this behaviour
 - Allow to create fetch with default headers and options
