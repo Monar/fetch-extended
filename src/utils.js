@@ -22,16 +22,20 @@ export function constructSearchParams(query = {}) {
 }
 
 export function timeoutPromise(timeout, promise, requstData) {
-  let timeoutId = null;
-
-  const timeoutPromise = new Promise((resolve, reject) => {
-    timeoutId = setTimeout(() => {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
       reject(new TimeoutError(`Request ${requstData.url} reached timeout. Options: ${JSON.stringify(requstData.options)}`, requstData));
     }, timeout);
-  });
 
-  return Promise.race([timeoutPromise, promise]).then(
-    value => { clearTimeout(timeoutId); return value },
-    error => { clearTimeout(timeoutId); throw error },
-  );
+    promise.then(
+      res => {
+        clearTimeout(timeoutId);
+        resolve(res);
+      },
+      err => {
+        clearTimeout(timeoutId);
+        reject(err);
+      },
+    );
+  });
 }

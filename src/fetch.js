@@ -17,20 +17,20 @@ export function fetchx(...args) {
 
 export function getFetchx(defaultHeaders = {}, defautlOptions = {}) {
   const defaults = {
-    headers: Object.assign({}, fetchxDefaults.headers, defaultHeaders),
+    headers: mergeHeaders(fetchxDefaults.headers, defaultHeaders),
     options: Object.assign({}, fetchxDefaults.options, defautlOptions),
   };
 
   return (...args) => fetchWrapper(fetch, defaults, ...args);
 }
 
-export function fetchWrapper(fetch, defaults, url, options = {}) {
+export function fetchWrapper(fetchImp, defaults, url, options = {}) {
   const headers = mergeHeaders(defaults.headers, options.headers);
   const searchParams = constructSearchParams(options.query);
   const fetchURL = searchParams ? `${url}?${searchParams}` : url;
   const fetchOptions = Object.assign({}, defaults.options, options, { headers });
 
-  const promise = fetch(fetchURL, fetchOptions);
+  const promise = fetchImp(fetchURL, fetchOptions);
   const { timeout } = fetchOptions;
   if (typeof timeout === 'number') {
     return timeoutPromise(timeout, promise, { url: fetchURL, options: fetchOptions });
