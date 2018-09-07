@@ -16,22 +16,18 @@
   "scripts": {
     "test": "jest",
     "build:es5": "rollup -c ./rollup.config/es5.js",
-    "build:es6": "rollup -c ./rollup.config/es6.js",
-    "version:es5": "npm version $(git describe --abbrev=0) --no-git-tag-version --allow-same-version",
-    "version:es6": "npm version $(git describe --abbrev=0)-es6 --no-git-tag-version --allow-same-version",
-    "publish:es5": "npm run build:es5 && npm run version:es5 && npm publish",
-    "publish:es6": "npm run build:es6 && npm run version:es6 && npm publish --tag es6",
-    "publish:all": "npm run publish:es6 && npm run publish:es5"
+    "build:es6": "rollup -c ./rollup.config/es6.js"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",
-    "babel-core": "7.0.0-bridge.0",
-    "@babel/preset-env": "7.0.0",
     "@babel/plugin-transform-modules-commonjs": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.4.2",
     "isomorphic-fetch": "2.2.1",
     "jest": "23.5.0",
     "jest-cli": "23.5.0",
+    "publish-variants": "1.0.4",
     "rollup": "0.65.2",
     "rollup-plugin-babel": "4.0.3"
   },
