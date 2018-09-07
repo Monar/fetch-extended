@@ -1,6 +1,6 @@
 {
   "name": "fetch-extended",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Wrapper of fetch, adding few extra features",
   "author": "Piotr Tomasz Monarski",
   "license": "MIT",
