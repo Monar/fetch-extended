@@ -65,4 +65,29 @@ describe('Fetch implementation', () => {
     const promise = fetchWrapper(fetch, fetchxDefaults, url, { timeout: 0 });
     await expect(promise).rejects.toBeInstanceOf(TimeoutError);
   });
+
+  it('should work with custom queryParser', async () => {
+
+    function queryParser(query = {}) {
+      const searchParams = new URLSearchParams();
+      Object.keys(query).forEach(key => { 
+          if(Array.isArray(query[key])) {
+            query[key].forEach(value => searchParams.append(key, value));
+            return
+          }
+          searchParams.append(key, query[key])
+        });
+      return searchParams.toString();
+    }
+
+    const url = 'http://test.address.com';
+    const testOptions = {
+      queryParser,
+      query: { foo: ['uno', 'dos,...'] },
+    };
+
+    const promise = fetchWrapper(fetch, fetchxDefaults, url, testOptions);
+    expect(promise).resolves.toMatchSnapshot();
+
+  });
 });

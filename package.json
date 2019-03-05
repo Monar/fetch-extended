@@ -19,17 +19,17 @@
     "build:es6": "rollup -c ./rollup.config/es6.js"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0",
-    "@babel/preset-env": "7.0.0",
+    "@babel/core": "7.3.4",
+    "@babel/plugin-transform-modules-commonjs": "7.2.0",
+    "@babel/preset-env": "7.3.4",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "23.4.2",
+    "babel-jest": "24.1.0",
     "isomorphic-fetch": "2.2.1",
-    "jest": "23.5.0",
-    "jest-cli": "23.5.0",
+    "jest": "24.1.0",
+    "jest-cli": "24.1.0",
     "publish-variants": "1.0.4",
-    "rollup": "0.65.2",
-    "rollup-plugin-babel": "4.0.3"
+    "rollup": "1.4.1",
+    "rollup-plugin-babel": "4.3.2"
   },
   "keywords": [
     "fetch"

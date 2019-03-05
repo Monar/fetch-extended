@@ -74,6 +74,34 @@ fetch('https://www.reject-after-15s.com', { timeout })
   .catch(error => if(error instanceof TimeoutError) { console.log('Request timeoued out') });
 ```
 
+### queryParser
+With `queryParser` option you can construct URL search parameter sting however you like. By default its string is build with `URLSearchParms` class. `queryParser`   function accepts single parameter which is `options.query` from the call and returns string that represent search params (those after `?` character).
+
+```js
+import fetch from 'fetch-extended';
+
+function queryParser(query) {
+  const searchParams = new URLSearchParams();
+  Object.keys(query)
+    .forEach(key => {
+      if(Array.isArray(query[key])) {
+        query[key].forEach(value => searchParams.append(key, value));
+        return
+      }
+      searchParams.append(key, query[key])
+    });
+  return searchParams.toString();
+}
+
+const query = {
+  foo: ['uno', 'dos']
+};
+
+fetch('http://localhost', { queryParser, query})
+// http://localhost?foo=uno&foo=dos'
+
+```
+
 ### Defaults
 To overwrite or set your own default headers and options use `getFetchx`.
 ```js

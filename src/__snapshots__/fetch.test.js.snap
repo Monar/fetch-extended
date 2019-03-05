@@ -12,6 +12,7 @@ Object {
   },
   "method": "GET",
   "mode": "cors",
+  "queryParser": [Function],
   "timeout": 60000,
 }
 `;

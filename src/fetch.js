@@ -8,6 +8,7 @@ export const fetchxDefaults = {
   headers: {},
   options: {
     timeout: 60000,
+    queryParser: constructSearchParams,
   },
 };
 
@@ -26,9 +27,9 @@ export function getFetchx(defaultHeaders = {}, defautlOptions = {}) {
 
 export function fetchWrapper(fetchImp, defaults, url, options = {}) {
   const headers = mergeHeaders(defaults.headers, options.headers);
-  const searchParams = constructSearchParams(options.query);
-  const fetchURL = searchParams ? `${url}?${searchParams}` : url;
   const fetchOptions = Object.assign({}, defaults.options, options, { headers });
+  const searchParams = fetchOptions.queryParser(fetchOptions.query);
+  const fetchURL = searchParams ? `${url}?${searchParams}` : url;
 
   const promise = fetchImp(fetchURL, fetchOptions);
   const { timeout } = fetchOptions;
