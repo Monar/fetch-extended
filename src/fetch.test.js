@@ -67,6 +67,15 @@ describe('Fetch implementation', () => {
   });
 
   it('should work with custom queryParser', async () => {
+    const url = 'http://test.address.com';
+    const fetch = url => Promise.resolve(url);
+    const testOptions = {
+      queryParser,
+      query: { foo: ['uno', 'dos,...'] },
+    };
+
+    const promise = fetchWrapper(fetch, fetchxDefaults, url, testOptions);
+    expect(promise).resolves.toMatchSnapshot();
 
     function queryParser(query = {}) {
       const searchParams = new URLSearchParams();
@@ -79,15 +88,5 @@ describe('Fetch implementation', () => {
         });
       return searchParams.toString();
     }
-
-    const url = 'http://test.address.com';
-    const testOptions = {
-      queryParser,
-      query: { foo: ['uno', 'dos,...'] },
-    };
-
-    const promise = fetchWrapper(fetch, fetchxDefaults, url, testOptions);
-    expect(promise).resolves.toMatchSnapshot();
-
   });
 });

@@ -1,6 +1,6 @@
 {
   "name": "fetch-extended",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Wrapper of fetch, adding few extra features",
   "author": "Piotr Tomasz Monarski",
   "license": "MIT",
@@ -19,9 +19,11 @@
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0",
     "@babel/preset-env": "7.3.4",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.1.0",
+    "babel-polyfill": "6.26.0",
     "isomorphic-fetch": "2.2.1",
     "jest": "24.1.0",
     "jest-cli": "24.1.0",
@@ -29,7 +31,9 @@
     "rollup-plugin-babel": "4.3.2"
   },
   "keywords": [
-    "fetch"
+    "fetch",
+    "query",
+    "timeout"
   ],
   "jest": {
     "setupFiles": [

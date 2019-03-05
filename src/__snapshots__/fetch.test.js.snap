@@ -16,3 +16,5 @@ Object {
   "timeout": 60000,
 }
 `;
+
+exports[`Fetch implementation should work with custom queryParser 1`] = `"http://test.address.com?foo=uno&foo=dos%2C..."`;
